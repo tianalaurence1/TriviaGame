@@ -1,3 +1,4 @@
+
 <!DOCTYPE HTML>
 <html>
 
@@ -9,14 +10,12 @@
             font-family: sans-serif;
             font-weight: 100;
         }
-
         h1 {
             color: #396;
             font-weight: 100;
             font-size: 40px;
             margin: 40px 0px 20px;
         }
-
         #clockdiv {
             font-family: sans-serif;
             color: #fff;
@@ -25,21 +24,18 @@
             text-align: center;
             font-size: 30px;
         }
-
         #clockdiv>div {
             padding: 10px;
             border-radius: 3px;
             background: #00BF96;
             display: inline-block;
         }
-
         #clockdiv div>span {
             padding: 15px;
             border-radius: 3px;
             background: #00816A;
             display: inline-block;
         }
-
         smalltext {
             padding-top: 5px;
             font-size: 16px;
@@ -59,8 +55,6 @@
     <p id="demo"></p>
 
     <script>
-
-
 function startTimer(duration, display) {
     var start = Date.now(),
         diff,
@@ -70,16 +64,12 @@ function startTimer(duration, display) {
         // get the number of seconds that have elapsed since 
         // startTimer() was called
         diff = duration - (((Date.now() - start) / 1000) | 0);
-
         // does the same job as parseInt truncates the float
         minutes = (diff / 60) | 0;
         seconds = (diff % 60) | 0;
-
         minutes = minutes < 10 ? "0" + minutes : minutes;
         seconds = seconds < 10 ? "0" + seconds : seconds;
-
         display.textContent = minutes + ":" + seconds; 
-
         if (diff <= 0) {
             // add one second so that the count down starts at the full duration
             // example 05:00 not 04:59
@@ -90,7 +80,6 @@ function startTimer(duration, display) {
     timer();
     setInterval(timer, 1000);
 }
-
 window.onload = function () {
     var timerStart = 30,
         display = document.querySelector('#time');

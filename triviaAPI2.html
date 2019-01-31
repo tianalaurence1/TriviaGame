@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <p id="demo"></p>
+    <p id="demoOne"></p>
+    <p id="demoTwo"></p>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript">
+
+
+        $.ajax({
+            url: "https://opentdb.com/api.php?amount=3&category=9&difficulty=easy&type=boolean",
+            method: "GET"
+        }).then(function (response) {
+            var obj = (response.results[0]);
+            var myJSON = JSON.stringify(obj);
+            document.getElementById("demo").innerHTML = myJSON;
+
+        });
+
+
+        $.ajax({
+            url: "https://opentdb.com/api.php?amount=3&category=9&difficulty=easy&type=boolean",
+            method: "GET"
+        }).then(function (response) {
+            var obj = (response.results[1]);
+            var myJSON = JSON.stringify(obj);
+            document.getElementById("demoOne").innerHTML = myJSON;
+
+        });
+
+        $.ajax({
+            url: "https://opentdb.com/api.php?amount=3&category=9&difficulty=easy&type=boolean",
+            method: "GET"
+        }).then(function (response) {
+            var obj = (response.results[2]);
+            var myJSON = JSON.stringify(obj);
+            document.getElementById("demoTwo").innerHTML = myJSON;
+
+        });
+
+
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>
