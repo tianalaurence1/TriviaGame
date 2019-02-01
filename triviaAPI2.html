@@ -9,54 +9,104 @@
 </head>
 
 <body>
+    <div id="start">
+        <h1>Welcome to the quize</h1>
+        <button id="startBtn">Start</button>
+    </div>
 
-    <p id="demo"></p>
-    <p id="demoTest"></p>
-    <p id="demoOne"></p>
+    <div id="questions" style="display:none">
+        <p id="demo"></p>
+        <button id="submitBtn">submit</button>
+        <p id="demoTest"></p>
+        <p id="time"></p>
+    </div>
+
+    <div id="end" style="display:none">
+        <h1>Your Score is: <span id="score"></span></h1>
+    </div>
+
     <p id="demoTwo"></p>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript">
 
+        var aws = []
+        var time = 3;
+        $("#time").text(time)
+        var isOn = false
 
+        setInterval(() => {
+            if (isOn) {
+                time--
+                if (time == 0) {
+                    isOn = false
+                    //lost
+                    $("#score").text(":(")
+                    $("#end").show()
+                    $("#questions").hide()
+                }
+                $("#time").text(time)
+            }
+
+        }, 1000);
         $.ajax({
-            url: "https://opentdb.com/api.php?amount=3&category=9&difficulty=easy&type=boolean",
+            url: "https://opentdb.com/api.php?amount=4&category=9&difficulty=easy&type=boolean",
             method: "GET"
         }).then(function (response) {
-            var objZero = (response.results[0]);
-            var myJSON = JSON.stringify(objZero);
-            document.getElementById("demo").innerHTML = myJSON;
-            console.log(response.results[0])
+            console.log(response.results);
+
+
+            response.results.forEach((element, index) => {
+                aws.push(element.correct_answer)
+                var objZero = (element["question"]);
+                var q = `<div>
+                    ${objZero}
+                    <div>
+                    <input type="radio" name="question${index}" value="True">True 
+                    <input type="radio" name="question${index}" value="False">False
+                    </div>
+                    </div>`
+
+
+
+                document.getElementById("demo").innerHTML += q;
+            });
+
+
+
 
         });
 
-
-        $.ajax({
-            url: "https://opentdb.com/api.php?amount=3&category=9&difficulty=easy&type=boolean",
-            method: "GET"
-        }).then(function (response) {
-            var objOne = (response.results[1]);
-            var myJSON = JSON.stringify(objOne);
-            document.getElementById("demoOne").innerHTML = myJSON;
-            //document.getElementById("demoTest").innerText = (response.results[1])
-
-            //var res = myJSON.split(category, General, Knowledge, type, boolean, difficulty, easy, question);
-            //var res = myJSON.slice(81);
-            document.getElementById("demoTest").innerHTML = res;
-            console.log(response.results[1])
-            console.log(myJSON)
-        });
+        //debugger;
+        $("#startBtn").on("click", () => {
+            $("#start").hide()
+            $("#questions").show()
+            isOn = true
+        })
 
 
-        $.ajax({
-            url: "https://opentdb.com/api.php?amount=3&category=9&difficulty=easy&type=boolean",
-            method: "GET"
-        }).then(function (response) {
-            var objTwo = (response.results[2]);
-            var myJSON = JSON.stringify(objTwo);
-            document.getElementById("demoTwo").innerHTML = myJSON;
-            console.log(response.results[2])
 
-        });
+        $("#submitBtn").on("click", () => {
+            var userScore = 0
+            aws.forEach((trueAnswer, index) => {
+                var pickedAnswer = $(`input:radio[name=question${index}]:checked`).val()
+                console.log(trueAnswer);
+                console.log($(`input:radio[name=question${index}]:checked`).val() + "\n");
+
+                if (trueAnswer == pickedAnswer) {
+                    userScore++
+
+                }
+
+            })
+            console.log(userScore);
+            $("#score").text(userScore)
+            $("#end").show()
+            $("#questions").hide()
+
+
+        })
+
+
 
 
 
