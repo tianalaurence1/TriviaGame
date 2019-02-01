@@ -11,6 +11,7 @@
 <body>
 
     <p id="demo"></p>
+    <p id="demoTest"></p>
     <p id="demoOne"></p>
     <p id="demoTwo"></p>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -21,9 +22,10 @@
             url: "https://opentdb.com/api.php?amount=3&category=9&difficulty=easy&type=boolean",
             method: "GET"
         }).then(function (response) {
-            var obj = (response.results[0]);
-            var myJSON = JSON.stringify(obj);
+            var objZero = (response.results[0]);
+            var myJSON = JSON.stringify(objZero);
             document.getElementById("demo").innerHTML = myJSON;
+            console.log(response.results[0])
 
         });
 
@@ -32,19 +34,27 @@
             url: "https://opentdb.com/api.php?amount=3&category=9&difficulty=easy&type=boolean",
             method: "GET"
         }).then(function (response) {
-            var obj = (response.results[1]);
-            var myJSON = JSON.stringify(obj);
+            var objOne = (response.results[1]);
+            var myJSON = JSON.stringify(objOne);
             document.getElementById("demoOne").innerHTML = myJSON;
+            //document.getElementById("demoTest").innerText = (response.results[1])
 
+            //var res = myJSON.split(category, General, Knowledge, type, boolean, difficulty, easy, question);
+            //var res = myJSON.slice(81);
+            document.getElementById("demoTest").innerHTML = res;
+            console.log(response.results[1])
+            console.log(myJSON)
         });
+
 
         $.ajax({
             url: "https://opentdb.com/api.php?amount=3&category=9&difficulty=easy&type=boolean",
             method: "GET"
         }).then(function (response) {
-            var obj = (response.results[2]);
-            var myJSON = JSON.stringify(obj);
+            var objTwo = (response.results[2]);
+            var myJSON = JSON.stringify(objTwo);
             document.getElementById("demoTwo").innerHTML = myJSON;
+            console.log(response.results[2])
 
         });
 

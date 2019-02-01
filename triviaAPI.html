@@ -10,6 +10,8 @@
 
 <body>
 
+    <p id="demoOne"></p>
+    <p id="demoTest"></p>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript">
@@ -82,7 +84,7 @@
         //addQuestion(response.results[]);
         //addQuestion(response.results);
         //addQuestion(response);
-    
+
 
         // setTimeout(function () {
         //     $('div').hide();
@@ -95,13 +97,16 @@
 
         $.ajax({
             url: "https://opentdb.com/api.php?amount=3&category=9&difficulty=easy&type=boolean",
-           method: "GET"
+            method: "GET"
         }).then(function (response) {
+            var objOne = (response.results[0]);
+            var myJSON = JSON.stringify(objOne);
+            document.getElementById("demoOne").innerHTML = myJSON;
             console.log(response.results[0])
-            JSON.stringify(response.results[0])
-            console.log(response.results.[1].category);
-            JSON.stringify(results)
-            $('body').text(response.results[0]);
+            //JSON.stringify(response.results[0])
+            //console.log(response.results.[1].category);
+            //JSON.stringify(results)
+            //$('body').text(response.results[0]);
         });
 
 
